@@ -1,70 +1,85 @@
 # Housing Price Prediction in Buenos Aires
 
-This project builds a sequence of apartment price models for Buenos Aires real estate data. It starts with a simple size-based regression, then adds geographic location, neighborhood, and broader feature sets to improve prediction quality. The repository also includes a Mexico City assignment notebook that follows the same modeling workflow on a separate dataset.
+This repository shows a step-by-step workflow for modeling apartment prices in Buenos Aires. The notebooks move from a simple size-only baseline to richer models that incorporate geography and neighborhood information, finishing with a full pipeline that uses imputation and regularization.
 
-## Project Highlights
+Summary findings (short): size is the strongest predictor, location and neighborhood add meaningful improvements, and regularization helps when many categorical features are present.
 
-- Clean and wrangle multiple CSV files with reusable functions
-- Explore how apartment size, location, and neighborhood affect price
-- Train linear regression and Ridge regression models
-- Handle missing values and categorical variables with scikit-learn pipelines
-- Compare each model against a baseline using mean absolute error
-- Interpret coefficients and feature importances
+---
 
-## Notebook Sequence
+## Data understanding
 
-### `021-price-and-size.ipynb`
-The first notebook builds a baseline model using apartment size as the only feature.
+- Source: multiple CSV files in `data/` combining Buenos Aires listings.  
+- Key columns: `price`, `area` (sq meters), `latitude`, `longitude`, `neighbourhood`, plus other listing attributes.  
+- Initial distribution: prices are right-skewed; area typically ranges from ~30–100+ sq meters.
 
-![Distribution of apartment sizes](assets/size-distribution.svg)
+## Cleaning
 
-### `022-price-and-location.ipynb`
-This notebook adds latitude and longitude, showing how apartment price changes with location.
+- Missing numeric values were imputed with medians inside modeling pipelines.  
+- Missing categorical values were filled with a `missing` label for one-hot encoding.  
+- Extreme outliers were inspected and excluded from modeling experiments where they would distort metrics.
 
-![Price vs. location map](assets/location-plane.svg)
+## Exploratory data analysis (EDA)
 
-![3D model: Price vs. latitude and longitude](assets/price-location-3d.svg)
+### Univariate
+- Look at distributions for `price` and `area`. The following scatter (and fitted line) shows the relationship between area and price.
 
-### `023-price-and-neighborhood.ipynb`
-Neighborhood becomes the main location feature here, with one-hot encoding used to turn categories into model inputs.
+![Price vs area (scatter + linear fit)](visualizations/price%20vs%20area.png)
 
-### `024-price-and-everything.ipynb`
-The full Buenos Aires workflow combines size, location, neighborhood, imputation, and regularization for a more complete model.
+Key point: larger apartments generally cost more; area captures substantial variance but not all.
 
-![Feature importance for apartment price](assets/feature-importance.svg)
+### Bivariate / Geographic
+- Price plotted over geographic coordinates highlights spatial clusters and neighborhood-driven price differences.
 
-### `025-assignment.ipynb`
-A related practice notebook applies the same approach to Mexico City apartment data, including wrangling, visualization, and a Ridge regression pipeline.
+![Price vs location (map)](visualizations/price%20vs%20location.png)
 
-## Visual Summary
+Key point: central and northern neighborhoods show price premiums compared with periphery.
 
-The notebooks show the progression from simple to more expressive modeling:
+### Neighborhood effects
+- Compare price distributions or aggregated means across neighborhoods to quantify local premiums/discounts.
 
-- Price vs. size
-- Price vs. location
-- Price vs. neighborhood
-- Multi-feature regression with preprocessing
-- Feature importance and model interpretation
+![Price vs neighbourhood](visualizations/price%20vs%20neigbourhood.png)
 
-## Tools Used
+Key point: certain neighborhoods (e.g., Palermo, Recoleta) show consistently higher prices after controlling for size.
 
-- `pandas` for data wrangling
-- `matplotlib` and `seaborn` for static charts
-- `plotly` for interactive geographic and 3D visualizations
-- `scikit-learn` for regression, imputation, pipelines, and evaluation
-- `category_encoders` for encoding categorical variables
-- `ipywidgets` for interactive exploration
+### Multivariate / Full view
+- A combined visualization shows how multiple features relate to price and model outputs.
 
-## Repository Contents
+![Price vs everything](visualizations/price%20vs%20everything.png)
 
-- `021-price-and-size.ipynb`
-- `022-price-and-location.ipynb`
-- `023-price-and-neighborhood.ipynb`
-- `024-price-and-everything.ipynb`
-- `025-assignment.ipynb`
-- `assets/`
-- `data/`
+Key point: combining size, location, and neighborhood yields the best predictive performance; feature importance confirms the relative weights.
 
-## Notes
+## Modeling
 
-The visuals above are static SVG exports embedded directly in the README. The full interactive versions remain inside the notebooks.
+- Baseline: linear regression on `area` alone—fast, interpretable baseline.  
+- Location model: add `latitude` and `longitude`—improves fit and reveals spatial trends.  
+- Neighborhood model: one-hot encode `neighbourhood` for interpretable local effects.  
+- Full pipeline: numerical imputation, one-hot encoding, and `Ridge` regression to control overfitting.
+
+Evaluation: compare MAE across models (use cross-validation). In this dataset the full model reduces MAE substantially compared to the area-only baseline.
+
+## Reproducing
+
+1. Ensure the `visualizations/` folder is present and contains the referenced images.  
+2. Open the notebooks in order: `021-price-and-size.ipynb`, `022-price-and-location.ipynb`, `023-price-and-neighborhood.ipynb`, `024-price-and-everything.ipynb`, `025-assignment.ipynb`.  
+3. Install dependencies (example):
+
+```powershell
+pip install -r requirements.txt
+```
+
+or
+
+```powershell
+pip install pandas scikit-learn matplotlib seaborn plotly category_encoders ipywidgets
+```
+
+## Files
+
+- `021-price-and-size.ipynb` — baseline and area analysis.  
+- `022-price-and-location.ipynb` — geographic models and maps.  
+- `023-price-and-neighborhood.ipynb` — categorical neighborhood effects.  
+- `024-price-and-everything.ipynb` — full pipeline with Ridge regularization.  
+- `025-assignment.ipynb` — Mexico City practice notebook.  
+- `visualizations/` — folder with static PNG exports used in the README.
+
+
