@@ -1,0 +1,85 @@
+<svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="priceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f39c12;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e74c3c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="900" height="520" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="450" y="30" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Price vs. Location (Latitude & Longitude)
+  </text>
+  
+  <!-- Axes -->
+  <line x1="100" y1="450" x2="800" y2="450" stroke="#34495e" stroke-width="2"/>
+  <line x1="100" y1="450" x2="100" y2="80" stroke="#34495e" stroke-width="2"/>
+  
+  <!-- Axis labels -->
+  <text x="450" y="490" font-size="12" text-anchor="middle" fill="#2c3e50">Longitude</text>
+  <text x="40" y="270" font-size="12" text-anchor="middle" fill="#2c3e50" transform="rotate(-90 40 270)">
+    Latitude
+  </text>
+  
+  <!-- Grid lines -->
+  <line x1="200" y1="450" x2="200" y2="80" stroke="#ecf0f1" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="300" y1="450" x2="300" y2="80" stroke="#ecf0f1" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="400" y1="450" x2="400" y2="80" stroke="#ecf0f1" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="500" y1="450" x2="500" y2="80" stroke="#ecf0f1" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="600" y1="450" x2="600" y2="80" stroke="#ecf0f1" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="700" y1="450" x2="700" y2="80" stroke="#ecf0f1" stroke-width="1" stroke-dasharray="3,3"/>
+  
+  <!-- Axis ticks and labels -->
+  <text x="200" y="465" font-size="11" text-anchor="middle" fill="#7f8c8d">-58.5</text>
+  <text x="300" y="465" font-size="11" text-anchor="middle" fill="#7f8c8d">-58.4</text>
+  <text x="400" y="465" font-size="11" text-anchor="middle" fill="#7f8c8d">-58.3</text>
+  <text x="500" y="465" font-size="11" text-anchor="middle" fill="#7f8c8d">-58.2</text>
+  <text x="600" y="465" font-size="11" text-anchor="middle" fill="#7f8c8d">-58.1</text>
+  <text x="700" y="465" font-size="11" text-anchor="middle" fill="#7f8c8d">-58.0</text>
+  
+  <!-- Data points (apartments) colored by price gradient -->
+  <circle cx="220" cy="380" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="250" cy="340" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="280" cy="370" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="310" cy="320" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="340" cy="350" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="370" cy="300" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="400" cy="330" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="430" cy="280" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="460" cy="310" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="490" cy="270" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="520" cy="290" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="550" cy="240" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="580" cy="260" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="610" cy="210" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="640" cy="230" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="670" cy="180" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="700" cy="200" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="730" cy="150" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="760" cy="170" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  <circle cx="780" cy="120" r="4" fill="url(#priceGradient)" opacity="0.7"/>
+  
+  <!-- Regression plane visualization (simplified as gradient background) -->
+  <defs>
+    <linearGradient id="planeGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ecf0f1;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#3498db;stop-opacity:0.15" />
+    </linearGradient>
+  </defs>
+  
+  <polygon points="100,450 800,450 800,100 100,250" fill="url(#planeGradient)" opacity="0.4"/>
+  
+  <!-- Legend -->
+  <rect x="650" y="70" width="130" height="90" fill="white" stroke="#bdc3c7" stroke-width="1" rx="3"/>
+  <text x="660" y="85" font-size="12" font-weight="bold" fill="#2c3e50">Price Range:</text>
+  <rect x="660" y="92" width="15" height="15" fill="#2ecc71"/>
+  <text x="680" y="104" font-size="11" fill="#7f8c8d">Low</text>
+  <rect x="660" y="112" width="15" height="15" fill="#f39c12"/>
+  <text x="680" y="124" font-size="11" fill="#7f8c8d">Medium</text>
+  <rect x="660" y="132" width="15" height="15" fill="#e74c3c"/>
+  <text x="680" y="144" font-size="11" fill="#7f8c8d">High</text>
+</svg>
